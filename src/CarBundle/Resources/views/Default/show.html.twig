@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>View {{ car.make }} {{ car.model }} </h2>
+    <p>{{ car.description }}</p>
+{% endblock %}
+
+{% block title %}
+    {{ parent() }}
+    View {{ car.model }}
+{% endblock %}
+

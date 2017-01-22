@@ -18,7 +18,7 @@ class Builder
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
         $menu->addChild('Home',['route' => 'homepage']);
-        $menu->addChild('Cars',['route' => 'car_index']);
+        $menu->addChild('Cars',['route' => 'car.index']);
 
         return $menu;
     }

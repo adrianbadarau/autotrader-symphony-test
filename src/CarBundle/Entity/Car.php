@@ -45,9 +45,15 @@ class Car
     /**
      * @var float
      *
-     * @ORM\Column(name="price", type="decimal", nullable=true)
+     * @ORM\Column(name="price", type="decimal", scale=2, nullable=true)
      */
     private $price;
+
+    /**
+     * @var string
+     * @ORM\Column(name="description", type="text", nullable=true)
+    **/
+    private $description;
 
 
     /**
@@ -154,6 +160,24 @@ class Car
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * @param mixed $description
+     * @return Car
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
 

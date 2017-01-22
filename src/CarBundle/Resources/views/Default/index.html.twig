@@ -10,11 +10,13 @@
             <tr>
                 <th>Maker</th>
                 <th>Model</th>
+                <th>Action</th>
                 </th>
                 {% for car in cars %}
             <tr>
                 <td>{{ car.make }}</td>
                 <td>{{ car.model }}</td>
+                <td><a href="{{ url('car.show', {carId:car.id}) }}">View</a></td>
             </tr>
             {% endfor %}
         </table>

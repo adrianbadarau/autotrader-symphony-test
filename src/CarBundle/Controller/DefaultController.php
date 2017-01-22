@@ -4,35 +4,30 @@ namespace CarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="car_index")
+     * @Route("/", name="car.index")
      */
     public function indexAction()
     {
-        $cars = [
-            [
-                'make' => 'audy',
-                'model' => 'tt',
-                'year' => '2009',
-                'price' => '5000'
-            ],
-            [
-                'make' => 'dacia',
-                'model' => 'logan',
-                'year' => '2014',
-                'price' => '4500'
-            ],
-            [
-                'make' => 'skoda',
-                'model' => 'octavia',
-                'year' => '2009',
-                'price' => '7000'
-            ],
-
-        ];
+        $carRepository = $this->getDoctrine()->getRepository('CarBundle:Car');
+        $cars = $carRepository->findAll();
         return $this->render('CarBundle:Default:index.html.twig',compact('cars'));
+    }
+
+    /**
+     * @Route("/{carId}", name="car.show")
+     * @param int $carId
+     * @return Response
+     */
+    public function showAction(int $carId) : Response
+    {
+        $carRepository = $this->getDoctrine()->getRepository('CarBundle:Car');
+        $car = $carRepository->find($carId);
+
+        return $this->render('CarBundle:Default:show.html.twig',compact('car'));
     }
 }
