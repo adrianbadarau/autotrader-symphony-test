@@ -12,6 +12,27 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('CarBundle:Default:index.html.twig');
+        $cars = [
+            [
+                'make' => 'audy',
+                'model' => 'tt',
+                'year' => '2009',
+                'price' => '5000'
+            ],
+            [
+                'make' => 'dacia',
+                'model' => 'logan',
+                'year' => '2014',
+                'price' => '4500'
+            ],
+            [
+                'make' => 'skoda',
+                'model' => 'octavia',
+                'year' => '2009',
+                'price' => '7000'
+            ],
+
+        ];
+        return $this->render('CarBundle:Default:index.html.twig',compact('cars'));
     }
 }
