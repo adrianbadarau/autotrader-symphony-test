@@ -130,6 +130,25 @@ class CarController extends Controller
     }
 
     /**
+     * Promote a car
+     *
+     * @Route("/promote/{id}", name="cars_promote")
+     * @Method("GET")
+     * @param Car $car
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function promoteAction(Car $car)
+    {
+        $dataChecker = $this->get('car.data_checker');
+        if ($dataChecker->checkCar($car)) {
+            $this->addFlash('success', 'Car promoted');
+        } else {
+            $this->addFlash('danger', 'Car can\'t be promoted');
+        }
+        return $this->redirectToRoute('cars_index');
+    }
+
+    /**
      * Creates a form to delete a car entity.
      *
      * @param Car $car The car entity
@@ -141,7 +160,6 @@ class CarController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('cars_delete', array('id' => $car->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Cars list</h1>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
@@ -29,6 +29,9 @@
                         </li>
                         <li>
                             <a href="{{ path('cars_edit', { 'id': car.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('cars_promote', {'id': car.id}) }}">promote</a>
                         </li>
                     </ul>
                 </td>
