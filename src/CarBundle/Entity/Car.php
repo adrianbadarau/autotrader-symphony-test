@@ -52,14 +52,14 @@ class Car
     /**
      * @var string
      * @ORM\Column(name="description", type="text", nullable=true)
-    **/
+     **/
     private $description;
 
     /**
      * @var  $navigation
      *
      * @ORM\Column(name="navigation", type="boolean", options={"default":false})
-    **/
+     **/
     private $navigation;
 
 
@@ -76,11 +76,11 @@ class Car
     /**
      * Set model
      *
-     * @param string $model
+     * @param Model $model
      *
      * @return Car
      */
-    public function setModel($model)
+    public function setModel(Model $model = null)
     {
         $this->model = $model;
 
@@ -90,7 +90,7 @@ class Car
     /**
      * Get model
      *
-     * @return string
+     * @return Model
      */
     public function getModel()
     {
@@ -190,11 +190,11 @@ class Car
     /**
      * Set make
      *
-     * @param \CarBundle\Entity\Make $make
+     * @param Make $make
      *
      * @return Car
      */
-    public function setMake(\CarBundle\Entity\Make $make = null)
+    public function setMake(Make $make = null)
     {
         $this->make = $make;
 
@@ -204,10 +204,17 @@ class Car
     /**
      * Get make
      *
-     * @return \CarBundle\Entity\Make
+     * @return Make
      */
     public function getMake()
     {
         return $this->make;
     }
+
+    function __toString()
+    {
+        return $this->getMake()->getName() . " " . $this->getModel()->getName();
+    }
+
+
 }

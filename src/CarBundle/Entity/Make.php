@@ -113,4 +113,11 @@ class Make
     {
         return $this->cars;
     }
+
+    function __toString()
+    {
+        return $this->getName();
+    }
+
+
 }

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="car.index")
+     * @Route("/offer", name="car.index")
      */
     public function indexAction()
     {
@@ -19,7 +19,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{carId}", name="car.show")
+     * @Route("/offer/{carId}", name="car.show")
      * @param int $carId
      * @return Response
      */
