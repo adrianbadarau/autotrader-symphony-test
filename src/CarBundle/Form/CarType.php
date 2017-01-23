@@ -5,6 +5,7 @@ namespace CarBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CarType extends AbstractType
 {
@@ -13,7 +14,23 @@ class CarType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('year')->add('price')->add('description')->add('navigation')->add('make')->add('model');
+        $builder
+            ->add('year', null, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank()
+                ]
+            ])
+            ->add('price', null, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank()
+                ]
+            ])
+            ->add('description')
+            ->add('navigation')
+            ->add('make')
+            ->add('model');
     }
 
     /**

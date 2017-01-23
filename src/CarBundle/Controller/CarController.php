@@ -37,6 +37,8 @@ class CarController extends Controller
      *
      * @Route("/new", name="cars_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -52,7 +54,7 @@ class CarController extends Controller
             return $this->redirectToRoute('cars_show', array('id' => $car->getId()));
         }
 
-        return $this->render('car/new.html.twig', array(
+        return $this->render('CarBundle:car:new.html.twig', array(
             'car' => $car,
             'form' => $form->createView(),
         ));
