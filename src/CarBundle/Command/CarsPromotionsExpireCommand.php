@@ -3,15 +3,32 @@
 namespace CarBundle\Command;
 
 use CarBundle\Entity\Car;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CarsPromotionsExpireCommand extends ContainerAwareCommand
+class CarsPromotionsExpireCommand extends Command
 {
+    /**
+     * @var $entityManager EntityManager
+    **/
+    protected $entityManager;
+
+    /**
+     * CarsPromotionsExpireCommand constructor.
+     * @param $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+        parent::__construct();
+    }
+
+
     protected function configure()
     {
         $this
@@ -30,22 +47,17 @@ class CarsPromotionsExpireCommand extends ContainerAwareCommand
             // ...
         }
 
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-
-        $carRepository = $em->getRepository('CarBundle:Car');
+        $carRepository = $this->entityManager->getRepository('CarBundle:Car');
         $cars = $carRepository->findAll();
         $bar = new ProgressBar($output, count($cars));
         $bar->start();
         foreach ($cars as $car){
-            /**
-             * @var $car Car
-            **/
             $car->setPromote(false);
-            $em->persist($car);
+            $this->entityManager->persist($car);
 
             $bar->advance();
         }
-        $em->flush();
+        $this->entityManager->flush();
         $bar->finish();
         $output->writeln('Reset all');
     }
