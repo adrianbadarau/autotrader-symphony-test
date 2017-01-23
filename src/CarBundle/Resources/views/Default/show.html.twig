@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>View {{ car.make }} {{ car.model }} </h2>
+    <h2>View {{ car.make.name }} {{ car.model.name }} </h2>
     <p>{{ car.description }}</p>
 
     <table class="table">
@@ -12,7 +12,7 @@
         </tr>
         <tr>
             <td>{{ car.price }}</td>
-            <td>{{ car.year|date('Y-m-d') }}</td>
+            <td>{{ car.year|date('Y-m') }}</td>
             <td>
                 {% if car.navigation %}
                     <span class="glyphicon glyphicon-ok"></span>
@@ -28,6 +28,6 @@
 
 {% block title %}
     {{ parent() }}
-    View {{ car.model }}
+    View Car
 {% endblock %}
 
