@@ -4,6 +4,7 @@ namespace CarBundle\Command;
 
 use CarBundle\Entity\Car;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -33,15 +34,19 @@ class CarsPromotionsExpireCommand extends ContainerAwareCommand
 
         $carRepository = $em->getRepository('CarBundle:Car');
         $cars = $carRepository->findAll();
+        $bar = new ProgressBar($output, count($cars));
+        $bar->start();
         foreach ($cars as $car){
             /**
              * @var $car Car
             **/
             $car->setPromote(false);
             $em->persist($car);
-            $output->writeln('Modified car '.$car->getId());
+
+            $bar->advance();
         }
         $em->flush();
+        $bar->finish();
         $output->writeln('Reset all');
     }
 
