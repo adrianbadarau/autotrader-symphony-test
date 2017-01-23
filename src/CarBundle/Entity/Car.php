@@ -22,16 +22,16 @@ class Car
     private $id;
 
     /**
-     * @var string
+     * @var Make
      *
-     * @ORM\Column(name="make", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="CarBundle\Entity\Make", inversedBy="cars")
      */
     private $make;
 
     /**
-     * @var string
+     * @var Model
      *
-     * @ORM\Column(name="model", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="CarBundle\Entity\Model", inversedBy="cars")
      */
     private $model;
 
@@ -71,30 +71,6 @@ class Car
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set make
-     *
-     * @param string $make
-     *
-     * @return Car
-     */
-    public function setMake($make)
-    {
-        $this->make = $make;
-
-        return $this;
-    }
-
-    /**
-     * Get make
-     *
-     * @return string
-     */
-    public function getMake()
-    {
-        return $this->make;
     }
 
     /**
@@ -209,5 +185,29 @@ class Car
     public function getNavigation()
     {
         return $this->navigation;
+    }
+
+    /**
+     * Set make
+     *
+     * @param \CarBundle\Entity\Make $make
+     *
+     * @return Car
+     */
+    public function setMake(\CarBundle\Entity\Make $make = null)
+    {
+        $this->make = $make;
+
+        return $this;
+    }
+
+    /**
+     * Get make
+     *
+     * @return \CarBundle\Entity\Make
+     */
+    public function getMake()
+    {
+        return $this->make;
     }
 }
