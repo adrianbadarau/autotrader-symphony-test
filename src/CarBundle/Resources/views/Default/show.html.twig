@@ -3,6 +3,27 @@
 {% block body %}
     <h2>View {{ car.make }} {{ car.model }} </h2>
     <p>{{ car.description }}</p>
+
+    <table class="table">
+        <tr>
+            <th>Price</th>
+            <th>Year</th>
+            <th>Navigation</th>
+        </tr>
+        <tr>
+            <td>{{ car.price }}</td>
+            <td>{{ car.year|date('Y-m-d') }}</td>
+            <td>
+                {% if car.navigation %}
+                    <span class="glyphicon glyphicon-ok"></span>
+                {% else %}
+                    <span class="glyphicon glyphicon-remove"></span>
+                {% endif %}
+            </td>
+            
+            <td></td>
+        </tr>
+    </table>
 {% endblock %}
 
 {% block title %}

@@ -55,6 +55,13 @@ class Car
     **/
     private $description;
 
+    /**
+     * @var  $navigation
+     *
+     * @ORM\Column(name="navigation", type="boolean", options={"default":false})
+    **/
+    private $navigation;
+
 
     /**
      * Get id
@@ -179,5 +186,28 @@ class Car
     {
         return $this->description;
     }
-}
 
+    /**
+     * Set navigation
+     *
+     * @param boolean $navigation
+     *
+     * @return Car
+     */
+    public function setNavigation($navigation)
+    {
+        $this->navigation = $navigation;
+
+        return $this;
+    }
+
+    /**
+     * Get navigation
+     *
+     * @return boolean
+     */
+    public function getNavigation()
+    {
+        return $this->navigation;
+    }
+}
